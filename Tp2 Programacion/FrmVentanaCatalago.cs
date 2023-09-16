@@ -67,7 +67,16 @@ namespace Tp2_Programacion
             Articulo seleccionado = (Articulo)DgbArticulos.CurrentRow.DataBoundItem;
             if (seleccionado != null)
             {
-                pbxArticulo.Load(seleccionado._UrlImagen);
+                try
+                {
+                    pbxArticulo.Load(seleccionado._UrlImagen);
+
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show("la imagen no se encuentra disponible.");
+                }
             }
             else
             {

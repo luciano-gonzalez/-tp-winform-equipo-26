@@ -18,26 +18,20 @@ namespace Tp2_Programacion
 
             try
             {
-                datos.setearConsulta("SELECT a.id,a.Codigo,a.Descripcion, a.Nombre,c.Id as 'idCategoria',c.Descripcion as 'Categoria',m.Id as 'idMarca', m.Descripcion as 'Marca',i.ImagenUrl as 'UrlImagen', a.Precio from ARTICULOS a inner join categorias c on c.Id = a.IdCategoria INNER join MARCAS m on m.Id = a.IdMarca inner join IMAGENES i on a.Id = i.IdArticulo");
+                datos.setearConsulta("select a.Id,a.Nombre,i.ImagenUrl as 'UrlImagen' from ARTICULOS a inner join IMAGENES i on a.Id = i.IdArticulo");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
                 {
                     Articulo aux = new Articulo();
                     aux.ID = (int)datos.Lector["id"];
-                    aux._codArticulo = (string)datos.Lector["Codigo"];
+                    
                     aux._nombre = (string)datos.Lector["Nombre"];
-                    aux._descripcion = (string)datos.Lector["Descripcion"];
-                    aux._marca = new Marca();
-                    aux._marca._nombre = (string)datos.Lector["Marca"];
-                    aux._marca._idMarca = (int)datos.Lector["idMarca"];
-                    aux._categoria = new Categoria();
-                    aux._categoria._descripcion = (string)datos.Lector["Categoria"];
-                    aux._categoria._idCategoria = (int)datos.Lector["idCategoria"];
                     aux._UrlImagen = (string)datos.Lector["UrlImagen"];
+                    
 
 
-                    aux._precio = Convert.ToSingle(datos.Lector["Precio"]);
+                    
 
                     lista.Add(aux);
                 }
